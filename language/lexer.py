@@ -18,16 +18,14 @@ class Lexer:
     def tokenize(self):
         tokens = []
         while self.current_char != None:
-            if self.current_char in OPERATORS:
-                word = self.build_word(OPERATORS)
-                if TK_ADD.contains(word):
-                    tokens.append(Token(TK_ADD.type))
-                elif TK_SUB.contains(word):
-                    tokens.append(Token(TK_SUB.type))
-                elif TK_MUL.contains(word):
-                    tokens.append(Token(TK_MUL.type))
-                elif TK_DIV.contains(word):
-                    tokens.append(Token(TK_DIV.type))
+            if TK_ADD.contains(self.current_char):
+                tokens.append(Token(TK_ADD.type))
+            if TK_SUB.contains(self.current_char):
+                tokens.append(Token(TK_SUB.type))
+            if TK_MUL.contains(self.current_char):
+                tokens.append(Token(TK_MUL.type))
+            if TK_DIV.contains(self.current_char):
+                tokens.append(Token(TK_DIV.type))
             elif TK_SET.contains(self.current_char):
                 tokens.append(Token(TK_SET.type))
             

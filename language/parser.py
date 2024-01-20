@@ -22,15 +22,19 @@ class Parser:
         token = self.current_token
         if token:
             right = self.branch(token)
+            # print(f"NODES: L:{left}, C:{token}, R:{right}")
             if token.type in OPERATOR_TOKENS:
                 token = Node(token, left, right)
+            
+                
+
             if type(right) == Node:
                 if type(token) == Node:
                     # print(f"OPERATORS: (T:{token.op}|INDEX:{ORDER.index(token.op.type)}, R:{right.op}|INDEX:{ORDER.index(right.op.type)})")
                     if ORDER.index(token.op.type) > ORDER.index(right.op.type):
                         token.swap_right()
-                    return token
-                return right
+                    return token.simplify()
+                return right.simplify()
         return token
 
     def advance(self):
